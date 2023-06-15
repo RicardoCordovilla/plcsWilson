@@ -25,14 +25,14 @@ router.patch('/:id',userServices.patchUser)
 //? Ruta de informacion propia del usuario loggeado
 router.route('/me')
     .get(
-        // passport.authenticate('jwt', {session: false}),
+        passport.authenticate('jwt', {session: false}),
         userServices.getMyUser)
     .patch(
-        // passport.authenticate('jwt', {session: false}),
+        passport.authenticate('jwt', {session: false}),
         userServices.patchMyUser
     )
     .delete(
-        // passport.authenticate('jwt', {session: false}),
+        passport.authenticate('jwt', {session: false}),
         userServices.deleteMyUser
     )
 

@@ -31,7 +31,7 @@ const registerUser = (req, res) => {
     usersControllers
       .createUser({name,ci,email,password})
       .then((data) => {
-        res.status(201).json(data);
+        res.status(201).json({data,created:"succes"});
       })
       .catch((err) => {
         res.status(400).json(err.message);
@@ -46,9 +46,10 @@ const registerUser = (req, res) => {
         email: "string",
         password: "string"
       },
-    });
+    })
   }
-};
+}
+
 
 const patchUser = (req, res) => {
   const id = req.params.id;

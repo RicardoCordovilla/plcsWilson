@@ -2,9 +2,9 @@ const reservasControllers = require('./reservas.controllers')
 
 const getReservasBydate = (req, res) => {
     // localhost:9000/api/v1/reservas?fecha=aaaa-mm-dd&hora=hh:mm
-    const fecha=req.query.fecha
-    const hora=req.query.hora
-    reservasControllers.getReservasBydate(fecha,hora)
+    const fecha = req.query.fecha
+    const hora = req.query.hora
+    reservasControllers.getReservasBydate(fecha, hora)
         .then(data => {
             res.status(200).json(data)
         })
@@ -46,9 +46,36 @@ const getReservasByPlc = (req, res) => {
         .catch(err => { res.status(400).json({ message: err.message }) })
 }
 
+const getReservasByUserId = (req, res) => {
+    const userId = req.params.id
+    reservasControllers.getReservasByUserId(userId)
+        .then(data => {
+            res.status(200).json(data)
+        })
+        .catch(err => { res.status(400).json({ message: err.message }) })
+}
+
+const deleteReserva = (req, res) => {
+    const id = req.params.id;
+    reservasControllers
+        .deleteReserva(id)
+        .then((data) => {
+            if (data) {
+                res.status(204).json();
+            } else {
+                res.status(404).json({ message: "Invalid ID" });
+            }
+        })
+        .catch((err) => {
+            res.status(400).json({ message: err.message });
+        })
+}
+
 
 module.exports = {
     getReservasBydate,
     getReservasByPlc,
-    createReserva
+    createReserva,
+    deleteReserva,
+    getReservasByUserId
 }
