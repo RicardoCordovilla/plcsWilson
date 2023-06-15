@@ -16,7 +16,7 @@ const initModels = require('./models/initModels')
 const app = express()
 
 app.use(express.json())
-app.use(cors())
+app.use(cors('*'))
 
 db.authenticate()
     .then(() => {
